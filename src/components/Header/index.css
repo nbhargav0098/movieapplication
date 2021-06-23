@@ -1,0 +1,49 @@
+.headers {
+  display: flex;
+  position: fixed;
+  justify-content: space-around;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+}
+.dark-header {
+  background-color: #111;
+  height: 100px;
+}
+.start-part {
+  display: flex;
+  align-items: center;
+}
+.content-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 15px;
+}
+
+.nav-link {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 16px;
+}
+.title {
+  color: #e50014;
+  font-family: Roboto;
+  font-size: 32px;
+}
+.end-part {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.profile-img {
+  margin-left: 15px;
+  height: 35px;
+}
