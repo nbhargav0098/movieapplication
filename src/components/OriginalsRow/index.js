@@ -39,35 +39,35 @@ const settings = {
 export default class OriginalsRow extends Component {
   constructor(props) {
     super(props)
-    this.state = {netflixOriginals: []}
+    this.state = {originalsData: []}
   }
 
   componentDidMount() {
-    this.fetchNetflixOriginalsData()
+    this.getOriginalsData()
   }
 
-  fetchNetflixOriginalsData = () => {
+  getOriginalsData = () => {
     fetch(
-      'https://api.themoviedb.org/3/discover/tv?api_key=521230044599bb08045f4e9ff35fbad8',
+      'https://api.themoviedb.org/3/discover/tv?api_key=a296c915c9f82c25cca95eab8568c3a2',
     )
       .then(response => response.json())
       .then(response => {
-        this.setState({netflixOriginals: response.results})
+        this.setState({originalsData: response.results})
       })
   }
 
   renderSlider = () => {
-    const {netflixOriginals} = this.state
+    const {originalsData} = this.state
 
     return (
       <Slider {...settings}>
-        {netflixOriginals.map(movie => {
-          const movieImage = `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+        {originalsData.map(series => {
+          const originalsDataImage = `https://image.tmdb.org/t/p/original/${series.poster_path}`
           return (
-            <div className="react-slick-item" key={movie.id}>
+            <div className="react-slick-item" key={series.id}>
               <img
                 className="poster"
-                src={movieImage}
+                src={originalsDataImage}
                 width="100%"
                 height="100%"
                 alt="originals"
@@ -80,13 +80,13 @@ export default class OriginalsRow extends Component {
   }
 
   render() {
-    const {netflixOriginals} = this.state
+    const {originalsData} = this.state
 
     return (
       <div className="slick-app-container">
         <h1 className="originals-heading">Originals</h1>
         <div className="slider-container">
-          {netflixOriginals.length ? (
+          {originalsData.length ? (
             this.renderSlider()
           ) : (
             <p style={{textAlign: 'center'}}>Loading...................</p>

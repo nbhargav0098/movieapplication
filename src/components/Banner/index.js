@@ -10,7 +10,7 @@ class Banner extends Component {
 
   getRandomOriginals = async () => {
     const originalsUrl =
-      'https://api.themoviedb.org/3/discover/tv?api_key=521230044599bb08045f4e9ff35fbad8'
+      'https://api.themoviedb.org/3/discover/tv?api_key=a296c915c9f82c25cca95eab8568c3a2'
     const response = await fetch(originalsUrl)
     const data = await response.json()
     const randomMovie =
@@ -24,7 +24,7 @@ class Banner extends Component {
   render() {
     const {oneMovie} = this.state
     return (
-      <header
+      <div
         className="banner-container"
         style={{
           backgroundSize: 'cover',
@@ -34,15 +34,15 @@ class Banner extends Component {
       >
         <div className="banner-content">
           <h1 className="banner-heading">{oneMovie.original_name}</h1>
-          <button className="banner-button" type="button">
-            Play
-          </button>
           <h1 className="banner-description">
             {this.truncate(oneMovie?.overview, 150)}
           </h1>
+          <button className="banner-button" type="button">
+            Play
+          </button>
         </div>
         <div className="banner-fade-container" />
-      </header>
+      </div>
     )
   }
 }

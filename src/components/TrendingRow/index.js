@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Slider from 'react-slick'
 
 import './index.css'
@@ -39,39 +40,41 @@ const settings = {
 export default class OriginalsRow extends Component {
   constructor(props) {
     super(props)
-    this.state = {netflixOriginals: []}
+    this.state = {trendingMovies: []}
   }
 
   componentDidMount() {
-    this.fetchNetflixOriginalsData()
+    this.fetchTrendingMoies()
   }
 
-  fetchNetflixOriginalsData = () => {
+  fetchTrendingMoies = () => {
     fetch(
       'https://api.themoviedb.org/3/trending/all/day?api_key=a296c915c9f82c25cca95eab8568c3a2',
     )
       .then(response => response.json())
       .then(response => {
-        this.setState({netflixOriginals: response.results})
+        this.setState({trendingMovies: response.results})
       })
   }
 
   renderSlider = () => {
-    const {netflixOriginals} = this.state
+    const {trendingMovies} = this.state
 
     return (
       <Slider {...settings}>
-        {netflixOriginals.map(movie => {
-          const movieImage = `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+        {trendingMovies.map(trendingMovie => {
+          const trendingMovieImage = `https://image.tmdb.org/t/p/original/${trendingMovie.poster_path}`
           return (
-            <div className="react-slick-item" key={movie.id}>
-              <img
-                className="poster"
-                src={movieImage}
-                width="100%"
-                height="100%"
-                alt="originals"
-              />
+            <div className="react-slick-item" key={trendingMovie.id}>
+              <Link to={`/movies/${trendingMovie.id}`}>
+                <img
+                  className="poster"
+                  src={trendingMovieImage}
+                  width="100%"
+                  height="100%"
+                  alt="originals"
+                />
+              </Link>
             </div>
           )
         })}
@@ -80,13 +83,13 @@ export default class OriginalsRow extends Component {
   }
 
   render() {
-    const {netflixOriginals} = this.state
+    const {trendingMovies} = this.state
 
     return (
       <div className="slick-app-container">
         <h1 className="trending-heading">Trending Now</h1>
         <div className="slider-container">
-          {netflixOriginals.length ? (
+          {trendingMovies.length ? (
             this.renderSlider()
           ) : (
             <p style={{textAlign: 'center'}}>Loading...................</p>

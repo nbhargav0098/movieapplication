@@ -52,11 +52,9 @@ class Popular extends Component {
     const {popularData, pageNumber} = this.state
 
     return (
-      <>
-        <div className="header-container">
-          <Header />
-        </div>
-        <div className="popular-movie-bg-container">
+      <div className="popular-movies-bg-container">
+        <Header />
+        <div className="popular-movie-container">
           <div className="movie-list-container">
             {popularData.map(item => (
               <PopularMovies fetchedData={item} key={item.id} />
@@ -80,7 +78,7 @@ class Popular extends Component {
             />
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }

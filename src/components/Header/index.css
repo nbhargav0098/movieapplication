@@ -7,17 +7,17 @@
   z-index: 999;
   transition-timing-function: ease-in;
   transition: all 0.5s;
+  background-color: #111;
 }
 .dark-header {
   background-color: #111;
-  height: 100px;
+  height: 80px;
 }
 .start-part {
   display: flex;
   align-items: center;
 }
 .content-container {
-  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,11 +33,6 @@
   text-decoration: none;
   margin-left: 16px;
 }
-.title {
-  color: #e50014;
-  font-family: Roboto;
-  font-size: 32px;
-}
 .end-part {
   display: flex;
   align-items: center;
@@ -46,4 +41,21 @@
 .profile-img {
   margin-left: 15px;
   height: 35px;
+}
+
+@media (orientation: Portrait) {
+  .dark-header {
+    height: 60px;
+  }
+  .content-container {
+    width: 95%;
+    margin-top: 15px;
+  }
+  .headers {
+    width: 100%;
+  }
+  .nav-link {
+    font-size: 12px;
+    margin-left: 10px;
+  }
 }

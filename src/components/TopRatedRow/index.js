@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Slider from 'react-slick'
 
 import './index.css'
@@ -39,39 +40,41 @@ const settings = {
 export default class OriginalsRow extends Component {
   constructor(props) {
     super(props)
-    this.state = {netflixOriginals: []}
+    this.state = {topMovies: []}
   }
 
   componentDidMount() {
-    this.fetchNetflixOriginalsData()
+    this.fetchTopMovies()
   }
 
-  fetchNetflixOriginalsData = () => {
+  fetchTopMovies = () => {
     fetch(
-      'https://api.themoviedb.org/3/movie/top_rated?api_key=521230044599bb08045f4e9ff35fbad8&language=en-US',
+      'https://api.themoviedb.org/3/movie/top_rated?api_key=a296c915c9f82c25cca95eab8568c3a2&language=en-US',
     )
       .then(response => response.json())
       .then(response => {
-        this.setState({netflixOriginals: response.results})
+        this.setState({topMovies: response.results})
       })
   }
 
   renderSlider = () => {
-    const {netflixOriginals} = this.state
+    const {topMovies} = this.state
 
     return (
       <Slider {...settings}>
-        {netflixOriginals.map(movie => {
-          const movieImage = `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+        {topMovies.map(topRatedMovie => {
+          const movieImage = `https://image.tmdb.org/t/p/original/${topRatedMovie.poster_path}`
           return (
-            <div className="react-slick-item" key={movie.id}>
-              <img
-                className="poster"
-                src={movieImage}
-                width="100%"
-                height="100%"
-                alt="originals"
-              />
+            <div className="react-slick-item" key={topRatedMovie.id}>
+              <Link to={`/movies/${topRatedMovie.id}`}>
+                <img
+                  className="poster"
+                  src={movieImage}
+                  width="100%"
+                  height="100%"
+                  alt="originals"
+                />
+              </Link>
             </div>
           )
         })}
@@ -80,13 +83,13 @@ export default class OriginalsRow extends Component {
   }
 
   render() {
-    const {netflixOriginals} = this.state
+    const {topMovies} = this.state
 
     return (
       <div className="slick-app-container">
         <h1 className="top-rated-heading">Top Rated</h1>
         <div className="slider-container">
-          {netflixOriginals.length ? (
+          {topMovies.length ? (
             this.renderSlider()
           ) : (
             <p style={{textAlign: 'center'}}>Loading...................</p>

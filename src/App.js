@@ -3,7 +3,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage'
 import Popular from './components/Popular'
-import Results from './components/Results'
+import Movies from './components/Movies'
+import DisplaySearchMovies from './components/DisplaySearchMovies'
 import './App.css'
 
 const App = () => (
@@ -12,7 +13,8 @@ const App = () => (
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/" component={HomePage} />
       <Route exact path="/popular" component={Popular} />
-      <Route exact path="/results" component={Results} />
+      <Route exact path="/movies/:id" component={Movies} />
+      <Route exact path="/search/:movies" component={DisplaySearchMovies} />
     </Switch>
   </BrowserRouter>
 )
